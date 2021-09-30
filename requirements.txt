@@ -1,0 +1,6 @@
+aspect_based_sentiment_analysis
+nest_asyncio
+numpy
+pandas
+textblob
+twint
