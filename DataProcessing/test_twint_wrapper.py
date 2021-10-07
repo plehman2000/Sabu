@@ -4,6 +4,7 @@
 Test twint_wrapper
 """
 
+import json
 from twint_wrapper import get_tweets
 
-get_tweets('from:@nbcnews', 20)
+print(json.dumps(get_tweets('from:@nbcnews', 20), indent=4))
