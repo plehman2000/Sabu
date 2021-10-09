@@ -14,6 +14,8 @@ c = twint.Config()
 # Store_object stores Tweets in list
 c.Store_object = True
 c.Hide_output = True
+# Remove non-English Tweets
+c.Lang = "en"
 
 def get_tweets(search, limit, popular_tweets = False):
     """Get Tweets that match given search"""
