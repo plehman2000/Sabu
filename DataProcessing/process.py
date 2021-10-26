@@ -8,7 +8,7 @@ Tweet processing module
 import html
 import regex
 import nltk
-from nltk import word.tokenize
+from nltk import word_tokenize as tokenize
 
 HASHTAG_CHARS = r"\p{L}\p{M}\p{Nd}_\u200c\u200d\ua67e\u05be\u05f3\u05f4\uff5e\u301c\u309b\u309c\u30a0\u30fb\u3003\u0f0b\u0f0c\u00b7"
 
@@ -47,14 +47,14 @@ def detect_profanity(processed_tweet_str):
     # Need to update profane_words list; only need lowercase words.
     profane_words = []
     output_dict = {}
-    tokens = word.tokenize(processed_tweet_str):
+    tokens = tokenize(processed_tweet_str)
 
     for token in tokens:
-    if token in profane_words:
-      if token not in output_dict.keys():
-        output_dict.update({token : 1})
-      else:
-        output_dict[token] += 1
+        if token in profane_words:
+          if token not in output_dict.keys():
+            output_dict.update({token : 1})
+          else:
+            output_dict[token] += 1
 
     return output_dict
     
