@@ -51,13 +51,12 @@ from process import process_tweet
 
 def analyzeTweetNouns(user, numTweets, explainerLength=3):
     nlp = spacy.load('en_core_web_sm')    
-    
     all_noun_dictionaries = []
-    for tweet in get_tweets('@potus', 1):
+    for tweet in get_tweets(user, 2):
         tempDict = {}
         processed_tweet=process_tweet(tweet)["tweet"]
-    
-        
+        #processed_tweet=input("Enter Input: ")
+        5
         colors, nouns = highlightNouns(processed_tweet)
         for i, noun in enumerate(nouns):
             
@@ -68,7 +67,7 @@ def analyzeTweetNouns(user, numTweets, explainerLength=3):
             for j,sentence in enumerate(doc.sents):
                 if (j+1) > explainerLength:
                     break
-                explainer += str(sentence.text)
+                explainer += str(sentence.text) + " "
             if explainer != "":
                 tempDict[noun] = explainer
                 noun_context =  " - " + explainer
@@ -79,9 +78,13 @@ def analyzeTweetNouns(user, numTweets, explainerLength=3):
     return all_noun_dictionaries
 
         
-dictionaries = analyzeTweetNouns(user='@potus', numTweets=1)
-#print(dictionaries[0])
-    #fix 'may refer to' edge case, example is 'networks'
+dictionaries = analyzeTweetNouns(user='@POTUS', numTweets=1)
+print(wikiExplainer(''))
+print(dictionaries[0])
+import emoji
+#print(emoji.emojize('Python is :thumbs_up:'))
+    #fix 'may refer to' edge case, example is 'networks'4
+    #handle emojis using emojize
         
 
 
