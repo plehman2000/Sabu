@@ -29,3 +29,5 @@ def get_tweets(search, limit, popular_tweets = False):
     # Return the search results in a pandas DataFrame
     #list comprehension hard limits number of tweets
     return [tweet.__dict__ for i,tweet in enumerate(twint.output.tweets_list) if i < limit]
+
+
