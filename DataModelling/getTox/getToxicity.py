@@ -1,10 +1,9 @@
-#USING TENSORFLOW 2.4.1
+#USING TENSORFLOW 2.4.1 uinsg --user tag
 
 from transformers import TFBertModel
-from utils import bert_utils, plots
 import os
 import numpy as np
-
+from DataModelling.getTox import bert_utils as bert_utils
 np.set_printoptions(precision=2)
 import tensorflow as tf
 
@@ -33,7 +32,7 @@ avg = layers.GlobalAveragePooling1D()(last_hidden_states)
 output = layers.Dense(N_CLASSES, activation="sigmoid")(avg)
 model = keras.Model(inputs=inputs, outputs=output)
 print(f'CurrDir: {os.getcwd()}')
-model.load_weights(os.getcwd() + '/getTox/toxicityModel/toxmodelckpt')
+model.load_weights(os.getcwd() + '\\DataModelling\\getTox\\toxicityModel\\toxmodelckpt')
 
 def getToxicity(sentences):
     enc_sentences = bert_utils.prepare_bert_input(sentences, MAX_SEQ_LEN, 'bert-base-uncased')
