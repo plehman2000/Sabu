@@ -32,7 +32,7 @@ c.Hide_output = True
 # Remove non-English Tweets
 c.Lang = "en"
 
-
+print('EDITED')
 
 
 def get_tweets(search, limit, popular_tweets = False):
@@ -42,6 +42,7 @@ def get_tweets(search, limit, popular_tweets = False):
     c.Limit = limit
     # Popular_tweets scrapes popular tweets if True, most recent if False
     c.Popular_tweets = popular_tweets
+    twint.output.tweets_list = []
     # Run the search on the Twint object
     twint.run.Search(c)
     # Return the search results in a pandas DataFrame
