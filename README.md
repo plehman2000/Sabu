@@ -1,4 +1,4 @@
-# TwitterProject
+# GUI for analysis of tweets using various BERT fine-tunings
 
-Please write expressive summaries and descriptions for all your commits,
-for the utility of everyone
+## Examples of model usage:
+![alt text](https://github.com/plehman2000/TwitterProject/blob/main/gh_resources/testNB.png?raw=true)
