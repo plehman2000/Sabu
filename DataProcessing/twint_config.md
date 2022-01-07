@@ -24,3 +24,6 @@ c.Search = "from:@nbcnews"
 c.Limit = 20
 twint.run.Search(c)
 ```
+
+Errors regarding 'Guest Token not Found' can be solved using the solution below:
+https://github.com/twintproject/twint/issues/1320
