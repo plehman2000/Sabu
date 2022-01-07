@@ -5,3 +5,4 @@ DataModelling/getTox/toxicityModel/toxmodelckpt.index
 DataModelling/getTox/toxicityModel/toxmodelckpt.data-00000-of-00001
 DataModelling/getSentiment/model.pkl
 *.pkl
+UI/FlaskDemo/toxicityModel/toxmodelckpt.data-00000-of-00001
