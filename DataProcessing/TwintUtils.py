@@ -12,7 +12,7 @@ import nltk
 from nltk import word_tokenize as tokenize
 #from twint_wrapper import get_tweets
 #from process import process_tweet
-import spacy
+#import spacy
 import random
 #from wikiUtil import wikiExplainer
 import requests
