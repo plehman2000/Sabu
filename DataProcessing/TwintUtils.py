@@ -3,7 +3,9 @@
 """
 Twint wrapper module
 """
-
+import sys
+import os
+sys.path.append(os.getcwd() + '\DataProcessing')
 import nest_asyncio
 import twint
 import html
