@@ -1,0 +1,16 @@
+# First time setup
+# 1. pip install flask
+# 2. Windows version:
+# 2. set FLASK_APP=sabu.py
+# 2. Linux version:
+# 2. export FLASK_APP=sabu.py
+
+# 3. git clone --depth=1 https://github.com/twintproject/twint.git
+# 4. cd twint
+# 5. pip3 install . -r requirements.txt
+# 6. pip3 install --user --upgrade -e git+https://github.com/twintproject/twint.git@origin/master#egg=twint
+
+# SET FLASK ENV VARIABLE FOR TEST RUN:
+# $env:FLASK_APP = "market.py"
+# FLASK DEBUG MODE (optional):
+# $env:FLASK_ENV = "development"
