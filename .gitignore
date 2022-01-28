@@ -3,7 +3,8 @@ DataModelling/getTox/toxicityModel.zip
 DataModelling/getTox/toxicityModel/checkpoint
 DataModelling/getTox/toxicityModel/toxmodelckpt.index
 DataModelling/getTox/toxicityModel/toxmodelckpt.data-00000-of-00001
-DataModelling/getSentiment/model.pkl
 *.pkl
 *.onnx
+twint-last-request.log
+twint-request_urls.log
 UI/FlaskDemo/toxicityModel/toxmodelckpt.data-00000-of-00001
