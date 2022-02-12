@@ -8,3 +8,4 @@ DataModelling/getTox/toxicityModel/toxmodelckpt.data-00000-of-00001
 twint-last-request.log
 twint-request_urls.log
 UI/FlaskDemo/toxicityModel/toxmodelckpt.data-00000-of-00001
+DataModelling/getEmotions/emotionModel/model.bin
