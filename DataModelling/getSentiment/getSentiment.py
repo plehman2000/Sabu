@@ -13,7 +13,7 @@ from torch import nn
 import onnx
 import onnxruntime
 
-MODELPATH = os.getcwd() + '/DataModelling/getSentiment/sentimentModel/'
+MODELPATH = os.getcwd() + '\\DataModelling\\getSentiment\\sentimentModel\\' #needs to be changed when deployed
 stat_dict = torch.load(MODELPATH + 'model.pkl', map_location='cpu') # device was cuda:0
 device = torch.device('cpu')
 tokenizer = transformers.BertTokenizer.from_pretrained('bert-base-cased')
@@ -85,7 +85,7 @@ np.testing.assert_allclose(to_numpy(example_out), example_ort_outs[0], rtol=1e-0
 
 model.train()
 
-def Inference(samples, disp=True, optimize=False):
+def sentimentInference(samples, disp=True, optimize=False):
     """Perform predictive inference"""
     all_probs = []
     if not optimize:

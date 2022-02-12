@@ -3,7 +3,7 @@
 from transformers import TFBertModel
 import os
 import numpy as np
-from DataModelling.getTox import bert_utils as bert_utils
+#from DataModelling.getTox import bert_utils as bert_utils
 np.set_printoptions(precision=2)
 import tensorflow as tf
 
@@ -19,6 +19,16 @@ classes = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hat
 classes = np.array(classes)
 
 
+from transformers import BertTokenizer
+
+
+def prepare_bert_input(sentences, seq_len, bert_name):
+    tokenizer = BertTokenizer.from_pretrained(bert_name)
+    encodings = tokenizer(sentences, truncation=True, padding='max_length',
+                                max_length=seq_len)
+    input = [np.array(encodings["input_ids"]), np.array(encodings["token_type_ids"]),
+               np.array(encodings["attention_mask"])]
+    return input
 
 
 input_ids = layers.Input(shape=(MAX_SEQ_LEN,), dtype=tf.int32, name='input_ids')
@@ -34,13 +44,13 @@ model = keras.Model(inputs=inputs, outputs=output)
 print(f'CurrDir: {os.getcwd()}')
 model.load_weights(os.getcwd() + '\\DataModelling\\getTox\\toxicityModel\\toxmodelckpt')
 
-def getToxicity(sentences):
-    enc_sentences = bert_utils.prepare_bert_input(sentences, MAX_SEQ_LEN, 'bert-base-uncased')
+def toxInference(sentences):
+    enc_sentences = prepare_bert_input(sentences, MAX_SEQ_LEN, 'bert-base-uncased')
     predictions = model.predict(enc_sentences)
     
-    sentence_tox_pairs = []
+    toxicityList = []
     for sentence, pred in zip(sentences, predictions):
         mask = (pred > 0.5).astype(bool)
         tox = str(classes[mask]) if any(mask) else "not toxic"
-        sentence_tox_pairs.append((sentence.replace("\n", "").strip(), tox, pred[mask]))
-    return sentence_tox_pairs
+        toxicityList.append([tox, pred[mask]])
+    return toxicityList
