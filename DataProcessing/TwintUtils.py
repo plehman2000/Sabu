@@ -60,14 +60,17 @@ def get_tweets(**kwargs):
     # If Twitter says there is no data, Twint retries to scrape Retries_count times
     config.Retries_count = 0
     for option in OPTIONS:
-        lower = option.lower()
-        if lower in kwargs:
-            vars(config)[option] = kwargs[lower]
+        if option in kwargs:
+            vars(config)[option] = kwargs[option]
+    #print(config)
+    config.Pandas = True
     twint.output.tweets_list = []
     # Run the search on the Twint object
     twint.run.Search(config)
     # List comprehension hard-limits number of tweets
-    return [tweet.__dict__ for i,tweet in enumerate(twint.output.tweets_list) if i < config.Limit]
+    Tweets_df = twint.storage.panda.Tweets_df
+    #return [tweet.__dict__ afor i,tweet in enumerate(twint.output.tweets_list) if i < config.Limit]
+    return Tweets_df
 
 def process_tweet(tweet):
     """Remove all URLs (e.g. www.xyz.com), hash tags (e.g. #topic), targets (@username)"""

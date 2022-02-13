@@ -1,3 +1,4 @@
+from tkinter.tix import TCL_WINDOW_EVENTS
 from flask import Flask, render_template, request, session
 from twint_wrapper import get_tweets
 
@@ -34,6 +35,9 @@ def search_page():
     if request.method == 'POST':
         #popular_tweets = False
         # set default parameters (none)
+
+        twint_options = {} #TODO add all options to this dictionary
+
         popular_tweets = False
         verified = False
         username = False
@@ -44,19 +48,19 @@ def search_page():
 
         limit = 5  # Default limit of 20
         if ('popular_tweets' in request.form):
-            popular_tweets = True
+            twint_options['Popular_tweets'] = True
             print('pop')
         if ('verified' in request.form):
-            verified = True
+            twint_options['Verified'] = True
             print('veri')
         if ('username' in request.form):
-            username = True
+            twint_options['Username'] = True
             print('user')
         if ('filter_retweets' in request.form):
-            filter_retweets = True
+            twint_options['Filter_retweets'] = True
             print('filter r')
         if ('links' in request.form):
-            links = True
+            twint_options['Links'] = 'include' #'exclude' will exclude tweets with links. up to you if you wanna implement 
             print('linky')
         if ('sabu_' in request.form):
             sabu_ = True
@@ -68,9 +72,10 @@ def search_page():
         # gather tweet limit val
         print('Limit entered: ' + str(request.form['limit']))
 
+        twint_options['Search'] = str(request.form['search_input'])
 
         print(str(request.form['search_input']))
-        data_dict = get_tweets(str(request.form['search_input']), 20, True)
+        data_dict = get_tweets(**twint_options)
     else:
         # Anger, Disgust, Fear, Joy, Sadness
         data = {'happy': 'nan', 'angry': 'nan', 'sad':'nan', 'confused':'nan', 'funny':'nan'}
