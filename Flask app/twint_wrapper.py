@@ -43,27 +43,30 @@ OPTIONS = ["Username", # scrapes tweets from the specified user
 
 def get_tweets(**kwargs):
     """Get tweets that match given search"""
-    # Create Twint object for a web-scrape query
-    config = twint.Config()
-    # Store_object stores tweets in list
-    config.Store_object = True
-    config.Hide_output = True
-    # Remove non-English tweets
-    config.Lang = "en"
-    # Tweets are scraped in batches of 20
-    config.Limit = 20
-    # If Twitter says there is no data, Twint retries to scrape Retries_count times
-    config.Retries_count = 0
-    for option in OPTIONS:
-        if option in kwargs:
-            vars(config)[option] = kwargs[option]
-    #print(config)
-    config.Pandas = True
-    twint.output.tweets_list = []
-    # Run the search on the Twint object
-    twint.run.Search(config)
-    # List comprehension hard-limits number of tweets
-    Tweets_df = twint.storage.panda.Tweets_df
-    #return [tweet.__dict__ afor i,tweet in enumerate(twint.output.tweets_list) if i < config.Limit]
+    try:
+        # Create Twint object for a web-scrape query
+        config = twint.Config()
+        # Store_object stores tweets in list
+        config.Store_object = True
+        config.Hide_output = True
+        # Remove non-English tweets
+        config.Lang = "en"
+        # Tweets are scraped in batches of 20
+        config.Limit = 20
+        # If Twitter says there is no data, Twint retries to scrape Retries_count times
+        config.Retries_count = 0
+        for option in OPTIONS:
+            if option in kwargs:
+                vars(config)[option] = kwargs[option]
+        #print(config)
+        config.Pandas = True
+        twint.output.tweets_list = []
+        # Run the search on the Twint object
+        twint.run.Search(config)
+        # List comprehension hard-limits number of tweets
+        Tweets_df = twint.storage.panda.Tweets_df
+        #return [tweet.__dict__ afor i,tweet in enumerate(twint.output.tweets_list) if i < config.Limit]
+    except:
+        Tweets_df =pandas.DataFrame
     return Tweets_df
 

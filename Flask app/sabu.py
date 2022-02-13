@@ -1,4 +1,6 @@
 from tkinter.tix import TCL_WINDOW_EVENTS
+
+import pandas
 from flask import Flask, render_template, request, session
 from twint_wrapper import get_tweets
 
@@ -54,8 +56,10 @@ def search_page():
             twint_options['Verified'] = True
             print('veri')
         if ('username' in request.form):
-            twint_options['Username'] = True
+            twint_options['Username'] = str(request.form['search_input'])
             print('user')
+        else:
+            twint_options['Search'] = str(request.form['search_input'])
         if ('filter_retweets' in request.form):
             twint_options['Filter_retweets'] = True
             print('filter r')
@@ -72,7 +76,7 @@ def search_page():
         # gather tweet limit val
         print('Limit entered: ' + str(request.form['limit']))
 
-        twint_options['Search'] = str(request.form['search_input'])
+        
 
         print(str(request.form['search_input']))
         data_dict = get_tweets(**twint_options)
@@ -82,7 +86,11 @@ def search_page():
         add_msg = "Enter a search query above."
         return render_template('index.html', data=data, add_msg=add_msg)
     # Convert dataframe to dictionary since Jinja is not compatible with DF's
-    items = data_dict.tweet.to_dict()
+    print(f'DF: {data_dict}')
+    if not data_dict.empty:
+        items = data_dict.tweet.to_dict()
+    else:
+        items = {}
     #print(items)
     # tweets = [tweet['tweet'] for tweet in data_dict]
     # list(items.values())
