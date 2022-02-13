@@ -16,27 +16,54 @@ import pandas
 # Store_object stores Tweets in list
 
 # Remove non-English Tweets
+OPTIONS = ["Username", # scrapes tweets from the specified user
+           "User_id", # scrapes tweets from the user with the specified ID
+           "Search", # scrapes tweets associated with the specified search terms
+           "Geo", # format lat,lon,radius with lat, lon in decimal degrees and radius ending with
+           "Near", # toponym, scrapes tweets near the specified location
+           "Year", # scrapes tweets before the specified year
+           "Since", # format YYYY-MM-DD, scrapes tweets after the specified date
+           "Until", # format YYYY-MM-DD, scrapes tweets before the specified date
+           "Verified", # scrapes tweets by verified users
+           "Limit", # NOTE: even when you specify the limit below 20 it will still return 20
+           "To", # scrapes tweets sent to the specified user
+           "All", # scrapes tweets sent to or from or mentioning the specified user
+           "Images", # scrapes tweets with images
+           "Videos", # scrapes tweets with videos
+           "Media", # scrapes tweets with images or videos
+           "Popular_tweets", # scrapes popular tweets if True, most recent if False
+           "Native_retweets", # scrapes native retweets
+           "Min_likes", # scrapes tweets with at least the specified number of likes
+           "Min_retweets", # scrapes tweets with at least the specified number of retweets
+           "Min_replies", # scrapes tweets with at least the specified number of replies
+           "Links", # includes tweets with links if "include", excludes if "exclude"
+           "Source", # scrapes tweets sent with the specified source client
+           "Members_list", # list ID, scrapes tweets by users in the specified list
+           "Filter_retweets"] # scrapes non-retweets
 
-
-def get_tweets(search, limit, popular_tweets = False):
-    c = twint.Config()
-    c.Store_object = True
-    c.Hide_output = True
-    c.Pandas = True
-    c.Lang = "en"
-    """Get Tweets that match given search"""
-    c.Search = search
-    #NOTE:"So even when you specify the limit below 100 it will still return 100, try to specify the limit in multiples of 100."
-    c.Limit = limit
-    # Popular_tweets scrapes popular tweets if True, most recent if False
-    c.Popular_tweets = popular_tweets
+def get_tweets(**kwargs):
+    """Get tweets that match given search"""
+    # Create Twint object for a web-scrape query
+    config = twint.Config()
+    # Store_object stores tweets in list
+    config.Store_object = True
+    config.Hide_output = True
+    # Remove non-English tweets
+    config.Lang = "en"
+    # Tweets are scraped in batches of 20
+    config.Limit = 20
+    # If Twitter says there is no data, Twint retries to scrape Retries_count times
+    config.Retries_count = 0
+    for option in OPTIONS:
+        if option in kwargs:
+            vars(config)[option] = kwargs[option]
+    #print(config)
+    config.Pandas = True
+    twint.output.tweets_list = []
     # Run the search on the Twint object
-    twint.run.Search(c)
-    # Return the search results in a pandas DataFrame
-    #list comprehension hard limits number of tweets
+    twint.run.Search(config)
+    # List comprehension hard-limits number of tweets
     Tweets_df = twint.storage.panda.Tweets_df
-    #var = []
-    #var = [dict(tweet.__dict__) for i,tweet in enumerate(twint.output.tweets_list) if i < limit]
-
+    #return [tweet.__dict__ afor i,tweet in enumerate(twint.output.tweets_list) if i < config.Limit]
     return Tweets_df
 
