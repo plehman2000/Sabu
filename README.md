@@ -12,10 +12,14 @@
 <br/>
 <br/>
 
- <img src="https://github.com/plehman2000/Sabu/blob/main/gh_resources/3.png?raw=true" width="auto" height="350"><img src="https://github.com/plehman2000/Sabu/blob/main/gh_resources/2.png?raw=true" width="auto" height="350">
- <br/>
-    Sample tweet query results for Username: 'elonmusk'
- <img src="https://github.com/plehman2000/Sabu/blob/main/gh_resources/tweet_output.png?raw=true" width="auto" height="350">
+<ul style="list-style: none;">
+<img src="https://github.com/plehman2000/Sabu/blob/main/gh_resources/3.png?raw=true" width="auto" height="350">
+<img src="https://github.com/plehman2000/Sabu/blob/main/gh_resources/2.png?raw=true" width="auto" height="350">
+  <br/>
+<br/>
+  <p> Sample tweet query results for Username: 'elonmusk'</p>
+<img src="https://github.com/plehman2000/Sabu/blob/main/gh_resources/tweet_output.png?raw=true" width="auto" height="350">
+  </ul>
 
 
 
