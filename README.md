@@ -6,7 +6,7 @@
     Sabu enables you to search Twitter by topic or username and run several NLP models on tweets of interest. This project uses 2 fine-tuned BERT PyTorch-based Models and a premade Tensorflow-based model for emotion detection, sentiment analysis and toxicity classification, respectively. TWINT is used to gather and filter tweets while surpassing Twitter API rate limits and Flask was used to build the webapp. 
 <br/>
 <br/>
-    To use, simply navigate to http://45.33.26.141/ and input your search, checking the boxes associated with your desired filters. When you find a tweet to analyze, simply click 'Analyze Tweet.'
+    To use, simply input your search, checking the boxes associated with your desired filters. When you find a tweet to analyze, simply click 'Analyze Tweet.'
 
 <br/>
 <br/>
